@@ -12,6 +12,11 @@ const Body = () =>{
     const [resturantsData, setResturantData] = useState([])
     const [toggleTopRes, setToggleTopRes] = useState(false)
 
+      // local variable for searching resturants
+    const [searchText, setSearchText] = useState("")
+
+
+
     const onlineStatus = useOnlineStatus() 
 
         // //  useEffect
@@ -32,6 +37,7 @@ const Body = () =>{
             
             setResturantData( jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants ?? jsonData?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants )
             setOriginalResturantsData(jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants ?? jsonData?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+            
 
         }
 
@@ -49,8 +55,19 @@ const Body = () =>{
         <div className="">
             <div className="flex justify-center space-x-50 text-xl m-10 " >
                 <div className="search space-x-10">
-                    <input className="w-80 border-0 border-b-2 border-gray-300 focus:outline-none focus:border-blue-950  transition duration-1000 ease-in-out p-2" type="text" placeholder="Search..." />
-                    <button className="bg-gray-600 p-3 rounded-2xl cursor-pointer" >Search</button>
+
+                    <input className="w-80 border-0 border-b-2 border-gray-300 focus:outline-none focus:border-blue-950  transition duration-1000 ease-in-out p-2" type="text" placeholder="Search..."  value={searchText}  
+                    onChange={(e)=>{
+                        setSearchText(e.target.value)
+                    }}/>
+
+                    <button className="bg-gray-600 p-3 rounded-2xl cursor-pointer" onClick={()=>{
+                        console.log(searchText)
+                        const filterResturants = OriginalResturantsData.filter((data)=>(
+                            data.info.name.toLowerCase().includes(searchText.toLowerCase())
+                        ))
+                        setResturantData(filterResturants)
+                    }} >Search</button>
                 </div>
                 <div>
                     <button className="bg-gray-600 p-3 rounded-2xl cursor-pointer" onClick={()=>{
