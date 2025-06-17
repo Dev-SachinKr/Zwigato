@@ -10,3 +10,5 @@ User-friendly interface with TailwindCSS for responsive design.
 Real-time restaurant and menu updates.
 
 Fast and smooth interactions with React.
+
+
