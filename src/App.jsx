@@ -8,6 +8,8 @@ import ResturantMenu from "./components/ResturantMenu"
 
 import { createBrowserRouter, Outlet } from "react-router-dom"
 import ShimmerUI from "./components/ShimmerUI"
+import { Provider } from "react-redux"
+import appStore from "./utils/appstore"
 
 
 // lazy Loading || Dynamic Loading || On-Demand Loading || Chunking || Code Splitting || Dynamic Bundling 
@@ -18,10 +20,12 @@ const Cart = lazy(()=>import("./components/Cart"));
 
 const App = ()=>{
   return(
+    <Provider store={appStore}>
     <div>
       <Header/>
       <Outlet/>
     </div>
+    </Provider>
   )
 }
 

@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom"
 import ShimmerUI from "./ShimmerUI"
 import { useResturantMenu } from "../utils/customHook"
 import RestaurantCategory from "./RestaurantCategory"
+import ErrorComponent from "./ErrorComponent"
 
 const ResturantMenu = ()=>{
 
@@ -25,9 +26,10 @@ const ResturantMenu = ()=>{
     // console.log(itemCards)   
 
 
+    try{
      const itemCategory = resMenu?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(category => category?.card?.card?.["@type"]==="type.googleapis.com/swiggy.presentation.food.v2.ItemCategory")
     //  console.log(itemCategory)
-     
+    
 
 
     
@@ -50,6 +52,12 @@ const ResturantMenu = ()=>{
             
         </div>
     )
+    }catch(err){
+        return (
+            <ErrorComponent/>
+        )
+    }
 }
+
 
 export default ResturantMenu
